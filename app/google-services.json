@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1045041029059",
+    "firebase_url": "https://inlesson-d6a94-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "inlesson-d6a94",
+    "storage_bucket": "inlesson-d6a94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045041029059:android:3cc6f799bc8a7242046776",
+        "android_client_info": {
+          "package_name": "english.lessons.inlesson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045041029059-33t68nf1g50rs509uut9sld3mlmhrev6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCeHSN1MUNsTENvGKPIxyNC4DJ5yZNzyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045041029059-33t68nf1g50rs509uut9sld3mlmhrev6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
