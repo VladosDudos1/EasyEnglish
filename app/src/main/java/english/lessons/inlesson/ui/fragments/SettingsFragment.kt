@@ -3,10 +3,10 @@ package english.lessons.inlesson.ui.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import english.lessons.inlesson.R
 import english.lessons.inlesson.app.App
@@ -14,6 +14,7 @@ import english.lessons.inlesson.databinding.FragmentSettingsBinding
 import english.lessons.inlesson.ui.Case
 import english.lessons.inlesson.ui.activities.MainActivity
 import java.util.Locale
+
 
 class SettingsFragment : Fragment() {
 
@@ -45,7 +46,9 @@ class SettingsFragment : Fragment() {
             App.dm.setEasyModeSate(isChecked)
 
             if (App.dm.easyModeState()) setLocale(requireActivity(), "ru") else setLocale(requireActivity(), "en")
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, SettingsFragment()).commit()
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
 
         binding.logoutBtn.setOnClickListener {

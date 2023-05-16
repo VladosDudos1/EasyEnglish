@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             1 -> finishAffinity()
             else -> {
                 MaterialDialog(this)
-                    .title(text = "You can't leave until you give an answer.")
+                    .title(text = getString(R.string.you_can_t_leave_until_you_give_an_answer))
                     .show()
             }
         }

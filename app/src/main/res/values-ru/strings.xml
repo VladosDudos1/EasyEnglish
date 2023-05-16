@@ -61,4 +61,5 @@
     <string name="waiting_the_first_player">Ожидаем первого игрока</string>
     <string name="make_answer">Ответить</string>
     <string name="input_your_answer">Введите ответ</string>
+    <string name="you_can_t_leave_until_you_give_an_answer">Вы не можете выйти, пока не ответите.</string>
 </resources>

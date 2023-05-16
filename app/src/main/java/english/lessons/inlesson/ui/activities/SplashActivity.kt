@@ -1,6 +1,7 @@
 package english.lessons.inlesson.ui.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import english.lessons.inlesson.R
 import english.lessons.inlesson.app.App
 import english.lessons.inlesson.databinding.ActivitySplashBinding
+import java.util.Locale
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -39,8 +41,8 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySplashBinding.inflate(layoutInflater)
+        if (App.dm.easyModeState()) setLocale(this, "ru") else setLocale(this, "en")
         setContentView(binding.root)
         checkBiometricSupport()
 
@@ -54,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
     private fun openBiometry() {
         val biometricPrompt = BiometricPrompt.Builder(this)
             .setTitle(getString(R.string.use_your_fingerprint))
-            .setNegativeButton("Cancel", this.mainExecutor) { dialog, i ->
+            .setNegativeButton(getString(R.string.leave), this.mainExecutor) { dialog, i ->
                 notifyUser(getString(R.string.authentication_cancelled))
                 finish()
             }.build()
@@ -104,5 +106,13 @@ class SplashActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
+    }
+    private fun setLocale(activity: Activity, langCode: String){
+        val locale = Locale(langCode)
+        Locale.setDefault(locale)
+        val resources = activity.resources
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }

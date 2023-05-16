@@ -70,7 +70,6 @@ class GameWordFragment : Fragment() {
                         store.child("room2").child("resultFirst").removeEventListener(this)
                     }
                 }
-
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
     }
