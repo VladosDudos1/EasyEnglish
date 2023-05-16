@@ -1,23 +1,20 @@
 package english.lessons.inlesson.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.afollestad.materialdialogs.MaterialDialog
-import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import english.lessons.inlesson.R
 import english.lessons.inlesson.databinding.GameWordFragmentBinding
-import english.lessons.inlesson.ui.Case
 import english.lessons.inlesson.ui.Case.backPressType
-import java.util.*
 import kotlin.random.Random
 
 class GameWordFragment : Fragment() {
@@ -26,6 +23,7 @@ class GameWordFragment : Fragment() {
     private var store = FirebaseDatabase.getInstance().reference
     private var question = ""
     private var randomTask = setRandom().toString()
+    private var isFirstPlayer = false
 
     private var isCorrect = false
 
@@ -57,6 +55,24 @@ class GameWordFragment : Fragment() {
         onClick()
         startGame()
         backPressType = 2
+
+        binding.answer1Btn.isEnabled = false
+        binding.answer2Btn.isEnabled = false
+        binding.answer3Btn.isEnabled = false
+        binding.answer4Btn.isEnabled = false
+
+        store.child("room2").child("resultFirst")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (!isFirstPlayer && dataSnapshot.value.toString().isNotEmpty()) {
+                        binding.questionTxt.text = dataSnapshot.value.toString()
+                        setButtonsEnabled()
+                        store.child("room2").child("resultFirst").removeEventListener(this)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
     }
 
 
@@ -100,9 +116,9 @@ class GameWordFragment : Fragment() {
             store.child("Game").child("2").get()
                 .addOnCompleteListener { r ->
                     MaterialDialog(activityForDialogs)
-                        .title(text = "Prompt")
+                        .title(text = getString(R.string.prompt))
                         .cancelable(true)
-                        .positiveButton(text = "Close prompt") {
+                        .positiveButton(text = getString(R.string.close_prompt)) {
                             it.cancel()
                         }
                         .message(
@@ -126,23 +142,16 @@ class GameWordFragment : Fragment() {
             makeAnswer(3)
         }
         binding.answerBtn.setOnClickListener {
+            var title = ""
             if (!binding.etAnswer.text.toString().lowercase()
                     .contains(question.lowercase()) && binding.etAnswer.text.toString()
                     .isNotEmpty()
             ) {
+                isFirstPlayer = true
                 store.child("room2").child("resultFirst").setValue(binding.etAnswer.text.toString())
                 val dialog = MaterialDialog(activityForDialogs)
-                    .cancelable(false)
-                    .title(text = "Thank you, waiting to the next player")
-                    .negativeButton(text = "Leave") {
-                        activityForDialogs.supportFragmentManager.popBackStack()
-                    }
-                dialog.show { }
-
-                val timer = Timer()
-                timer.scheduleAtFixedRate(object : TimerTask() {
-                    var title = ""
-                    override fun run() {
+                val postListener = object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
                         store.child("room2").child("resultSecond").get()
                             .addOnCompleteListener { f ->
                                 store.child("room2").child("resultSecond")
@@ -152,18 +161,18 @@ class GameWordFragment : Fragment() {
                                             f.result.value.toString() == question
                                         if (r.result.value.toString().isNotEmpty()) {
                                             dialog.cancel()
-                                            title = if (isCorrect) {
-                                                "The player got you!"
-                                            } else {
-                                                "The player did not understand you"
-                                            }
-                                            timer.cancel()
+                                            title =
+                                                if (isCorrect) getString(R.string.the_player_got_you) else getString(
+                                                    R.string.the_player_did_not_understand_you
+                                                )
                                             MaterialDialog(activityForDialogs)
                                                 .cancelable(false)
                                                 .title(text = title)
-                                                .negativeButton(text = "Leave") {
+                                                .negativeButton(text = getString(R.string.leave)) {
                                                     it.cancel()
                                                     activityForDialogs.supportFragmentManager.popBackStack()
+                                                    store.child("room2").child("resultSecond")
+                                                        .removeEventListener(this)
                                                     resultOfGame()
                                                 }
                                                 .show()
@@ -171,10 +180,23 @@ class GameWordFragment : Fragment() {
                                     }
                             }
                     }
-                }, 1500, 2000)
+
+                    override fun onCancelled(error: DatabaseError) {}
+                }
+                store.child("room2").child("resultSecond").addValueEventListener(postListener)
+                dialog.apply {
+                    cancelable(false)
+                    title(text = getString(R.string.nice_waiting_to_the_next_player))
+                    negativeButton(text = getString(R.string.leave)) {
+                        store.child("room2").child("resultSecond")
+                            .removeEventListener(postListener)
+                        activityForDialogs.supportFragmentManager.popBackStack()
+                    }
+                }
+                dialog.show { }
             } else Toast.makeText(
                 activityForDialogs,
-                "Answer can`t contain a question word or be blank",
+                getString(R.string.answer_can_t_contain_a_question_word_or_be_blank),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -189,18 +211,18 @@ class GameWordFragment : Fragment() {
         }
     }
 
-    private fun answerRes(ans: String){
+    private fun answerRes(ans: String) {
         store.child("room2").child("resultSecond").setValue(ans)
-        val title = if (ans == question) "Success, you`re right" else "Loose, you`re incorrect"
+        val title = if (ans == question) getString(R.string.success_you_re_right) else getString(R.string.loose_you_re_incorrect)
         MaterialDialog(activityForDialogs)
             .title(text = title)
             .cancelable(false)
-            .positiveButton(text = "Close the game") {
+            .positiveButton(text = getString(R.string.leave)) {
                 it.cancel()
                 activityForDialogs.supportFragmentManager.popBackStack()
             }
             .show { }
-        Handler().postDelayed({ resultOfGame() }, 2000)
+        resultOfGame()
     }
 
     private fun setRandom(): Int {
@@ -220,8 +242,9 @@ class GameWordFragment : Fragment() {
                                         .child("question").value.toString()
                                     store.child("room2").child("isEmpty").setValue(false)
                                     store.child("room2").child("idGame").setValue(randomTask)
-                                    binding.questionTxt.text = it.result.child("tasks").child(randomTask)
-                                        .child("question").value.toString()
+                                    binding.questionTxt.text =
+                                        it.result.child("tasks").child(randomTask)
+                                            .child("question").value.toString()
                                 } else {
                                     vision2()
                                     randomTask = r.result.child("idGame").value.toString()
@@ -230,27 +253,18 @@ class GameWordFragment : Fragment() {
                                     setQuestion()
                                     question = it.result.child("tasks").child(randomTask)
                                         .child("question").value.toString()
-                                    val timer = Timer()
-                                    timer.scheduleAtFixedRate(object : TimerTask() {
-                                        override fun run() {
-                                            if (resF.isEmpty()) {
-                                                store.child("room2").get()
-                                                    .addOnCompleteListener { t ->
-                                                        resF =
-                                                            t.result.child("resultFirst").value.toString()
-                                                    }
-                                            } else {
-                                                activityForDialogs.runOnUiThread {
-                                                    binding.questionTxt.text = resF
-                                                    binding.answer1Btn.isEnabled = true
-                                                    binding.answer2Btn.isEnabled = true
-                                                    binding.answer3Btn.isEnabled = true
-                                                    binding.answer4Btn.isEnabled = true
-                                                }
-                                                timer.cancel()
+                                    if (resF.isEmpty()) {
+                                        store.child("room2").get()
+                                            .addOnCompleteListener { t ->
+                                                resF =
+                                                    t.result.child("resultFirst").value.toString()
                                             }
+                                    } else {
+                                        activityForDialogs.runOnUiThread {
+                                            binding.questionTxt.text = resF
+                                            setButtonsEnabled()
                                         }
-                                    }, 200, 1800)
+                                    }
                                 }
                             }
                         }
@@ -290,5 +304,12 @@ class GameWordFragment : Fragment() {
         binding.answer4Btn.visibility = View.VISIBLE
 
         binding.helpBtn.visibility = View.GONE
+    }
+
+    private fun setButtonsEnabled() {
+        binding.answer1Btn.isEnabled = true
+        binding.answer2Btn.isEnabled = true
+        binding.answer3Btn.isEnabled = true
+        binding.answer4Btn.isEnabled = true
     }
 }

@@ -139,8 +139,8 @@ class GameQuizFragment : Fragment() {
                             }
                     } else {
                         val dialog = MaterialDialog(requireActivity())
-                            .title(text = "Ваш результат: $correctAnswers")
-                            .positiveButton(text = "play again") {
+                            .title(text = getString(R.string.your_result) + " " + correctAnswers)
+                            .positiveButton(text = getString(R.string.play_again)) {
                                 correctAnswers = 0
                                 index = 1
                                 it.cancel()
@@ -154,7 +154,7 @@ class GameQuizFragment : Fragment() {
                                         }
                                     }
                             }
-                            .negativeButton(text = "main menu") {
+                            .negativeButton(text = getString(R.string.main_menu)) {
                                 correctAnswers = 0
                                 it.cancel()
                                 requireActivity().supportFragmentManager.popBackStack()

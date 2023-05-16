@@ -64,40 +64,10 @@ class GameFragment : Fragment(), GameAdapter.OnClickListener {
     }
 
     private fun onClick() {
-        binding.imgLogout.setOnClickListener {
-            MaterialDialog(requireActivity())
-                .title(text = "Вы уверены, что хотите выйти?")
-                .positiveButton(text = "Да") {
-                    App.dm.logout()
-                    changeFragment(LoginFragment())
-                }
-                .negativeButton { it.cancel() }
-                .show()
+        binding.imgSettings.setOnClickListener {
+           changeFragment(SettingsFragment())
         }
     }
-//        binding.profileCardImg.setOnClickListener {
-//            val et = EditText(this)
-//            val dialog: AlertDialog = AlertDialog.Builder(this)
-//                .setTitle("Введите ссылку на изображение")
-//                .setView(et)
-//                .setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
-//                    val editTextInput: String = et.text.toString()
-//                    if (URLUtil.isValidUrl(editTextInput)){
-//                        store.child("users").child(user!!.uid).child("image").setValue(editTextInput)
-//                            .addOnCompleteListener {
-//                                if (it.isSuccessful){
-//                                    Toast.makeText(this, "Успешно", Toast.LENGTH_SHORT).show()
-//                                    setUser()
-//                                }
-//                                else Toast.makeText(this, "Что-то пошло не так", Toast.LENGTH_SHORT).show()
-//                            }
-//                    }
-//                })
-//                .setNegativeButton("Cancel", null)
-//                .create()
-//            dialog.show()
-//        }
-
 
     private fun setUser() {
         store.child("users").child(user!!.uid).get()

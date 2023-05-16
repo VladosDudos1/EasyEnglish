@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.fragments.SettingsFragment">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_easy_mode_switcher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/easy_mode"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/easy_mode_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/line2View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:thumbTint="@color/purple_700"
+        app:trackTint="@color/grey" />
+
+    <TextView
+        android:id="@+id/txt_biometry_switcher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/use_biometry"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2View" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/biometry_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/line3View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:thumbTint="@color/purple_700"
+        app:trackTint="@color/grey" />
+
+    <View
+        android:id="@+id/line3View"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/txt_biometry_switcher" />
+
+    <View
+        android:id="@+id/line2View"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/txt_easy_mode_switcher" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout_btn"
+        android:layout_width="150dp"
+        android:layout_height="64dp"
+        android:layout_margin="32dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_baseline_login_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

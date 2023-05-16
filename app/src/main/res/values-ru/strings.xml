@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Easy English</string>
+    <string name="want_exit">Вы уверены, что хотите выйти?</string>
+    <string name="forgetPassword">Забыли пароль?</string>
+    <string name="logo">Логотип</string>
+    <string name="imagegame">Картинка игры</string>
+    <string name="easy_mode">Упрощённый режим</string>
+    <string name="settings">Настройки</string>
+    <string name="logout">Выход</string>
+    <string name="use_biometry">Использовать биометрию</string>
+    <string name="authentication_cancelled">Аутентификация отменена</string>
+    <string name="use_your_fingerprint">Используйте отпечаток пальца</string>
+    <string name="fingerprint_authentication_has_t_been_enabled_in_settings">Аутентификация по отпечатку пальца не включена в настройках</string>
+    <string name="fingerprint_permission_is_not_enabled">Разрешение на отпечатки пальцев не включено</string>
+    <string name="success">Успешно!</string>
+    <string name="smth_went_wrong">Что-то пошло не так, проверьте качество соединения.</string>
+    <string name="enter_the_password">Введите пароль</string>
+    <string name="you_have_been_successfully_authorised">Вы успешно авторизовались</string>
+    <string name="failed_to_authorize">Не удалось выполнить авторизацию</string>
+    <string name="your_email_must_be_correct">Ваш email должен быть корректным</string>
+    <string name="enter_correct_email">Введите корректную почту</string>
+    <string name="enter_email">Введите почту</string>
+
+    <string name="yes">Да</string>
+    <string name="do_you_want_to_reset_password_for">Вы хотите сменить пароль для</string>
+    <string name="some_problems_went">Произошли некоторые проблемы</string>
+    <string name="authorization">Авторизация</string>
+    <string name="login">Email</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Вход</string>
+    <string name="registration">Регистрация</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="nickname">Никнейм</string>
+    <string name="sign_up">Продолжить</string>
+    <string name="enter_your_nickname">Введите свой ник</string>
+    <string name="password_must_be_6_symbols_at_least">Пароль должен содержать хотя бы 6 символов</string>
+    <string name="password_mismatch">Пароли не совпадают</string>
+    <string name="registered_successfully">Регистрация прошла удачно</string>
+
+    <string name="game1_description">В этой игре вам предстоит объяснить, что вы видите на картинке. После этого второй игрок выберет изображение из данного ему списка на основе предоставленного описания.</string>
+    <string name="game2_description"> В этой игре вам предстоит объяснить представленное слово. После этого второй игрок будет выбирать слово из данного ему списка, основываясь на объяснении первого игрока.</string>
+    <string name="game3_description">В этой игре вам предстоит пройти квиз, в каждом заднии нужно будет выбрать лишь одну подходящую по описанию картинку.</string>
+    <string name="game_description">Описание игры</string>
+    <string name="who_what_is_it">Кто/что это?</string>
+    <string name="explain_the_word">Объясни слово</string>
+    <string name="explain_the_picture">Обьясни картинку</string>
+    <string name="your_result">Ваш результат:</string>
+    <string name="main_menu">В меню</string>
+    <string name="play_again">Сыграть снова</string>
+
+    <string name="answer_can_t_contain_a_question_word_or_be_blank">Ответ не может содержать вопросительное слово или быть пустым</string>
+    <string name="nice_waiting_to_the_next_player">Отлично, ждем следующего игрока</string>
+    <string name="the_player_did_not_understand_you">Игрок вас не понял</string>
+    <string name="the_player_got_you">Игрок вас понял!</string>
+    <string name="leave">Выйти</string>
+    <string name="loose_you_re_incorrect">Неверно, вы проиграли</string>
+    <string name="success_you_re_right">Вы правы, успех!</string>
+    <string name="close_prompt">Закрыть подсказку</string>
+    <string name="prompt">Подсказка</string>
+    <string name="waiting_the_first_player">Ожидаем первого игрока</string>
+    <string name="make_answer">Ответить</string>
+    <string name="input_your_answer">Введите ответ</string>
+</resources>

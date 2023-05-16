@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
                         changeFragment(GameFragment())
                     } else {
                         Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
-                        makeToast("Что-то пошло не так, проверьте качество соединения.")
+                        makeToast(getString(R.string.smth_went_wrong))
                     }
                 }
         }
@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
         if (checkEmail(binding.editLogin.text.toString())) {
             if (!binding.editPassword.text.isNullOrEmpty()) {
                 return true
-            } else makeToast("Введите пароль")
+            } else makeToast(getString(R.string.enter_the_password))
         }
         return false
     }
@@ -91,9 +91,9 @@ class LoginFragment : Fragment() {
 
     private fun updateUI(account: FirebaseUser?) {
         if (account != null) {
-            makeToast("Вы успешно авторизовались")
+            makeToast(getString(R.string.you_have_been_successfully_authorised))
         } else {
-            makeToast("Не удалось выполнить авторизацию")
+            makeToast(getString(R.string.failed_to_authorize))
         }
     }
 
@@ -108,26 +108,26 @@ class LoginFragment : Fragment() {
 
         if (checkEmail(binding.editLogin.text.toString())) {
             MaterialDialog(requireActivity())
-                .title(text = "Do you want to reset password for")
+                .title(text = getString(R.string.do_you_want_to_reset_password_for))
                 .message(text = binding.editLogin.text.toString() + " ?")
                 .positiveButton(text = "Yes") {
                     auth.sendPasswordResetEmail(binding.editLogin.text.toString())
                         .addOnCompleteListener {
                             if (!it.isSuccessful) {
-                                Toast.makeText(activity, "Some problems went", Toast.LENGTH_SHORT)
+                                Toast.makeText(activity, getString(R.string.some_problems_went), Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
                 }
                 .show { }
-        } else Toast.makeText(activity, "Ваш email должен быть корректным", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(activity, getString(R.string.your_email_must_be_correct), Toast.LENGTH_SHORT).show()
     }
 
     private fun checkEmail(email: String): Boolean {
         when {
             !Patterns.EMAIL_ADDRESS.matcher(binding.editLogin.text)
-                .matches() -> makeToast("Введите правильную почту")
-            binding.editLogin.text.isNullOrEmpty() -> makeToast("Введите почту")
+                .matches() -> makeToast(getString(R.string.enter_correct_email))
+            binding.editLogin.text.isNullOrEmpty() -> makeToast(getString(R.string.enter_email))
             else -> return true
         }
         return false

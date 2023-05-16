@@ -35,19 +35,19 @@ class GameAdapter(private val onClickListener: OnClickListener,  val context: Co
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/123.jpg?alt=media&token=4087994c-a3df-4b71-88a6-9a5e8c96a3fd")
                     .into(binding.imgGame)
-                binding.gameNameTxt.text = "Explain the picture"
+                binding.gameNameTxt.text = context.getString(R.string.explain_the_picture)
             }
             1 -> {
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/1.jpg?alt=media&token=41675ade-3041-421a-9cb0-dcf2b6ae4f3c")
                     .into(binding.imgGame)
-                binding.gameNameTxt.text = "Explain the word"
+                binding.gameNameTxt.text = context.getString(R.string.explain_the_word)
             }
             2 -> {
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/game.png?alt=media&token=75386a36-633a-4418-86b1-ae4471579448")
                     .into(binding.imgGame)
-                binding.gameNameTxt.text = "Who/what is it"
+                binding.gameNameTxt.text = context.getString(R.string.who_what_is_it)
             }
         }
 
@@ -56,23 +56,12 @@ class GameAdapter(private val onClickListener: OnClickListener,  val context: Co
         }
         binding.imgInfo.setOnClickListener {
             when (position){
-                0 -> description = "In this game you have to explain what you see in the picture. After that, the second player will choose an image from the presented list based on the description provided"
-                1 -> description = "In this game you have to explain the presented word. After that, the second player will choose a word from the presented words based on the explanation provided"
-                2 -> description = "In this game, you need to correctly translate all the tasks and select the appropriate pictures"
+                0 -> description = context.getString(R.string.game1_description)
+                1 -> description = context.getString(R.string.game2_description)
+                2 -> description = context.getString(R.string.game3_description)
             }
             MaterialDialog(context)
-                .title(text = "Game description")
-                .message(text = description)
-                .show()
-        }
-        binding.imgInfo.setOnClickListener {
-            when (position){
-                0 -> description = "In this game you have to explain what you see in the picture. After that, the second player will choose an image from the presented list based on the description provided"
-                1 -> description = "In this game you have to explain the presented word. After that, the second player will choose a word from the presented words based on the explanation provided"
-                2 -> description = "In this game, you need to correctly translate all the tasks and select the appropriate pictures"
-            }
-            MaterialDialog(context)
-                .title(text = "Game description")
+                .title(text = context.getString(R.string.game_description))
                 .message(text = description)
                 .show()
         }
