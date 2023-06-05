@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/gameLayout"
+    android:layout_width="match_parent"
     android:layout_height="240dp">
 
     <ImageView
         android:id="@+id/imgGame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/imagegame" />
+        android:contentDescription="@string/imagegame"
+        android:scaleType="centerCrop" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#88000000"/>
+        android:background="#88000000" />
 
     <TextView
         android:id="@+id/gameNameTxt"
@@ -43,10 +42,19 @@
         android:id="@+id/img_info"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="24dp"
         android:src="@drawable/ic_baseline_help_24"
-        app:tint="@color/white"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/personsImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_info"
+        app:layout_constraintStart_toStartOf="@+id/img_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

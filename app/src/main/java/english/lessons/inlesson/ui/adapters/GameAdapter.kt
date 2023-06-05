@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide
 import english.lessons.inlesson.R
 import english.lessons.inlesson.databinding.GameItemBinding
 
-class GameAdapter(private val onClickListener: OnClickListener,  val context: Context) : RecyclerView.Adapter<GameAdapter.GameVH>() {
+class GameAdapter(private val onClickListener: OnClickListener, private val context: Context) :
+    RecyclerView.Adapter<GameAdapter.GameVH>() {
     private lateinit var binding: GameItemBinding
     private lateinit var description: String
 
@@ -30,19 +31,24 @@ class GameAdapter(private val onClickListener: OnClickListener,  val context: Co
     }
 
     override fun onBindViewHolder(holder: GameVH, position: Int) {
+        var personsCount = 1
         when (position) {
             0 -> {
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/123.jpg?alt=media&token=4087994c-a3df-4b71-88a6-9a5e8c96a3fd")
                     .into(binding.imgGame)
                 binding.gameNameTxt.text = context.getString(R.string.explain_the_picture)
+                personsCount = 2
             }
+
             1 -> {
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/1.jpg?alt=media&token=41675ade-3041-421a-9cb0-dcf2b6ae4f3c")
                     .into(binding.imgGame)
                 binding.gameNameTxt.text = context.getString(R.string.explain_the_word)
+                personsCount = 2
             }
+
             2 -> {
                 Glide.with(binding.imgGame)
                     .load("https://firebasestorage.googleapis.com/v0/b/inlesson-d6a94.appspot.com/o/game.png?alt=media&token=75386a36-633a-4418-86b1-ae4471579448")
@@ -50,12 +56,13 @@ class GameAdapter(private val onClickListener: OnClickListener,  val context: Co
                 binding.gameNameTxt.text = context.getString(R.string.who_what_is_it)
             }
         }
+        binding.personsImg.setImageResource(if (personsCount == 2) R.drawable.baseline_group_24 else R.drawable.baseline_person_24)
 
         binding.gameLayout.setOnClickListener {
             onClickListener.click(position)
         }
         binding.imgInfo.setOnClickListener {
-            when (position){
+            when (position) {
                 0 -> description = context.getString(R.string.game1_description)
                 1 -> description = context.getString(R.string.game2_description)
                 2 -> description = context.getString(R.string.game3_description)
@@ -69,8 +76,9 @@ class GameAdapter(private val onClickListener: OnClickListener,  val context: Co
 
     override fun getItemCount(): Int = 3
 
-    interface OnClickListener{
+    interface OnClickListener {
         fun click(data: Int)
     }
-    class GameVH(view: View): RecyclerView.ViewHolder(view)
+
+    class GameVH(view: View) : RecyclerView.ViewHolder(view)
 }

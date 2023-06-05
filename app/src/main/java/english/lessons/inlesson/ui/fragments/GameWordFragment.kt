@@ -38,7 +38,7 @@ class GameWordFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = GameWordFragmentBinding.bind(
             inflater.inflate(
                 R.layout.game_word_fragment, container, false
@@ -70,6 +70,7 @@ class GameWordFragment : Fragment() {
                         store.child("room2").child("resultFirst").removeEventListener(this)
                     }
                 }
+
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
     }
@@ -212,7 +213,8 @@ class GameWordFragment : Fragment() {
 
     private fun answerRes(ans: String) {
         store.child("room2").child("resultSecond").setValue(ans)
-        val title = if (ans == question) getString(R.string.success_you_re_right) else getString(R.string.loose_you_re_incorrect)
+        val title =
+            if (ans == question) getString(R.string.success_you_re_right) else getString(R.string.loose_you_re_incorrect)
         MaterialDialog(activityForDialogs)
             .title(text = title)
             .cancelable(false)

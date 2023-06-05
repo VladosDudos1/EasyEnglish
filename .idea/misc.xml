@@ -1,36 +1,6 @@
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/User/AndroidStudioProjects/InLesson/app/src/main/res/layout/game_choose_fragment.xml" value="0.21875" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/InLesson/app/src/main/res/layout/game_image_fragment.xml" value="0.21875" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/InLesson/app/src/main/res/layout/game_item.xml" value="0.33" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/drawable/edit_shape.xml" value="0.31979166666666664" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/drawable/ic_baseline_help_24.xml" value="0.198" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.205" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/drawable/splash.xml" value="0.25677083333333334" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/activity_game.xml" value="0.1701388888888889" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/activity_main.xml" value="0.23692307692307693" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/activity_registration.xml" value="0.24618055555555557" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/activity_splash.xml" value="0.23692307692307693" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_choose_fragment.xml" value="0.25" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_fragment.xml" value="0.25" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_image_fragment.xml" value="0.20902777777777778" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_item.xml" value="0.240625" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_picture_fragment.xml" value="0.2298611111111111" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_quiz_fragment.xml" value="0.25" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_who_fragment.xml" value="0.18715277777777778" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/game_word_fragment.xml" value="0.20902777777777778" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/gmame_who_fragment.xml" value="0.1" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/login_fragment.xml" value="0.2298611111111111" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/layout/registration_fragment.xml" value="0.2298611111111111" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.205" />
-        <entry key="..\:/vlad/InLesson/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1365" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
