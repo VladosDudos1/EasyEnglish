@@ -148,7 +148,7 @@ class GameWordFragment : Fragment() {
                     .isNotEmpty()
             ) {
                 isFirstPlayer = true
-                store.child("room2").child("resultFirst").setValue(binding.etAnswer.text.toString())
+                store.child("room2").child("resultFirst").setValue(binding.etAnswer.text.toString().replace("fuck", "****"))
                 val dialog = MaterialDialog(activityForDialogs)
                 val postListener = object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
