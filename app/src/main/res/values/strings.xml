@@ -59,4 +59,5 @@
     <string name="make_answer">Make answer</string>
     <string name="input_your_answer">Input your answer</string>
     <string name="you_can_t_leave_until_you_give_an_answer">You can\'t leave until you give an answer.</string>
+    <string name="from_max">out of 20</string>
 </resources>

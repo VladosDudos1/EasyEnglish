@@ -14,13 +14,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import english.lessons.inlesson.R
 import english.lessons.inlesson.databinding.GameWordFragmentBinding
+import english.lessons.inlesson.ui.Case
+import english.lessons.inlesson.ui.Case.addRating
 import english.lessons.inlesson.ui.Case.backPressType
+import english.lessons.inlesson.ui.Case.store
 import kotlin.random.Random
 
 class GameWordFragment : Fragment() {
 
     private lateinit var binding: GameWordFragmentBinding
-    private var store = FirebaseDatabase.getInstance().reference
     private var question = ""
     private var randomTask = setRandom().toString()
     private var isFirstPlayer = false
@@ -152,32 +154,31 @@ class GameWordFragment : Fragment() {
                 val dialog = MaterialDialog(activityForDialogs)
                 val postListener = object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        store.child("room2").child("resultSecond").get()
-                            .addOnCompleteListener { f ->
-                                store.child("room2").child("resultSecond")
-                                    .get()
-                                    .addOnCompleteListener { r ->
-                                        isCorrect =
-                                            f.result.value.toString() == question
-                                        if (r.result.value.toString().isNotEmpty()) {
-                                            dialog.cancel()
-                                            title =
-                                                if (isCorrect) getString(R.string.the_player_got_you) else getString(
-                                                    R.string.the_player_did_not_understand_you
-                                                )
-                                            MaterialDialog(activityForDialogs)
-                                                .cancelable(false)
-                                                .title(text = title)
-                                                .negativeButton(text = getString(R.string.leave)) {
-                                                    it.cancel()
-                                                    activityForDialogs.supportFragmentManager.popBackStack()
-                                                    store.child("room2").child("resultSecond")
-                                                        .removeEventListener(this)
-                                                    resultOfGame()
-                                                }
-                                                .show()
+                        store.child("room2").child("resultSecond")
+                            .get()
+                            .addOnCompleteListener { r ->
+                                isCorrect =
+                                    r.result.value.toString() == question
+                                if (r.result.value.toString().isNotEmpty()) {
+                                    dialog.cancel()
+                                    title = if (isCorrect){
+                                        addRating()
+                                        getString(R.string.the_player_got_you)
+                                    } else getString(
+                                        R.string.the_player_did_not_understand_you
+                                    )
+                                    MaterialDialog(activityForDialogs)
+                                        .cancelable(false)
+                                        .title(text = title)
+                                        .negativeButton(text = getString(R.string.leave)) {
+                                            it.cancel()
+                                            activityForDialogs.supportFragmentManager.popBackStack()
+                                            store.child("room2").child("resultSecond")
+                                                .removeEventListener(this)
+                                            resultOfGame()
                                         }
-                                    }
+                                        .show()
+                                }
                             }
                     }
 
@@ -214,7 +215,10 @@ class GameWordFragment : Fragment() {
     private fun answerRes(ans: String) {
         store.child("room2").child("resultSecond").setValue(ans)
         val title =
-            if (ans == question) getString(R.string.success_you_re_right) else getString(R.string.loose_you_re_incorrect)
+            if (ans == question){
+                addRating()
+                getString(R.string.success_you_re_right)
+            } else getString(R.string.loose_you_re_incorrect)
         MaterialDialog(activityForDialogs)
             .title(text = title)
             .cancelable(false)

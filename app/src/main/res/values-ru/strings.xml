@@ -62,4 +62,5 @@
     <string name="make_answer">Ответить</string>
     <string name="input_your_answer">Введите ответ</string>
     <string name="you_can_t_leave_until_you_give_an_answer">Вы не можете выйти, пока не ответите.</string>
+    <string name="from_max">из 20</string>
 </resources>

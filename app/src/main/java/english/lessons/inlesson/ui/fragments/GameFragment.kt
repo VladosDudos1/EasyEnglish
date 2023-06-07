@@ -15,7 +15,7 @@ import english.lessons.inlesson.app.App
 import english.lessons.inlesson.databinding.GameFragmentBinding
 import english.lessons.inlesson.ui.Case
 import english.lessons.inlesson.ui.Case.backPressType
-import english.lessons.inlesson.ui.Case.user
+import english.lessons.inlesson.ui.Case.getRating
 import english.lessons.inlesson.ui.adapters.GameAdapter
 import java.lang.Exception
 
@@ -39,7 +39,7 @@ class GameFragment : Fragment(), GameAdapter.OnClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             GameFragmentBinding.bind(inflater.inflate(R.layout.game_fragment, container, false))
         return binding.root
@@ -50,6 +50,7 @@ class GameFragment : Fragment(), GameAdapter.OnClickListener {
         setLinearAdapter()
         backPressType = 1
 
+        getRating()
         setUser()
         onClick()
     }
@@ -70,9 +71,10 @@ class GameFragment : Fragment(), GameAdapter.OnClickListener {
     }
 
     private fun setUser() {
-        store.child("users").child(user!!.uid).get()
+        store.child("users").child(App.dm.getUserKey()).get()
             .addOnCompleteListener {
                 binding.nickName.text = it.result.child("name").value.toString()
+                binding.ratingText.text = it.result.child("rating").value.toString()
             }
     }
 
