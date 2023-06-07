@@ -11,11 +11,13 @@ import english.lessons.inlesson.databinding.ActivityMainBinding
 import english.lessons.inlesson.ui.Case.backPressType
 import english.lessons.inlesson.ui.fragments.GameFragment
 import english.lessons.inlesson.ui.fragments.LoginFragment
+import english.lessons.inlesson.ui.viewmodel.MainViewModel
 import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
 
+//    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

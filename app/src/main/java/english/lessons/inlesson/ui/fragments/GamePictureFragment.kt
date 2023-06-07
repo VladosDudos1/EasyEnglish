@@ -19,7 +19,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import english.lessons.inlesson.R
 import english.lessons.inlesson.databinding.GamePictureFragmentBinding
+import english.lessons.inlesson.ui.Case
+import english.lessons.inlesson.ui.Case.addRating
 import english.lessons.inlesson.ui.Case.backPressType
+import english.lessons.inlesson.ui.Case.store
 import english.lessons.inlesson.ui.activities.MainActivity
 import kotlin.random.Random.Default.nextInt
 import java.util.*
@@ -28,7 +31,6 @@ import java.util.*
 class GamePictureFragment : Fragment() {
 
     private lateinit var binding: GamePictureFragmentBinding
-    private var store = FirebaseDatabase.getInstance().reference
     private var question = ""
     private var randomTask = setRandom().toString()
     private var isFirstPlayer = false
@@ -177,6 +179,7 @@ class GamePictureFragment : Fragment() {
                                 if (r.result.value.toString().isNotEmpty()) {
                                     dialog.cancel()
                                     title = if (isCorrect) {
+                                        addRating()
                                         getString(R.string.the_player_got_you)
                                     } else {
                                         getString(R.string.the_player_did_not_understand_you)
@@ -231,7 +234,10 @@ class GamePictureFragment : Fragment() {
     @SuppressLint("SuspiciousIndentation")
     private fun answerRes(img: String) {
         store.child("room").child("resultSecond").setValue(img)
-        val title = if (img == question)  getString(R.string.success_you_re_right) else  getString(R.string.loose_you_re_incorrect)
+        val title = if (img == question){
+            addRating()
+            getString(R.string.success_you_re_right)
+        } else  getString(R.string.loose_you_re_incorrect)
 
         MaterialDialog(activityForDialogs)
             .title(text = title)

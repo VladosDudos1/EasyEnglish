@@ -139,7 +139,7 @@ class GameQuizFragment : Fragment() {
                             }
                     } else {
                         val dialog = MaterialDialog(requireActivity())
-                            .title(text = getString(R.string.your_result) + " " + correctAnswers)
+                            .title(text = "${getString(R.string.your_result)} $correctAnswers ${getString(R.string.from_max)}")
                             .positiveButton(text = getString(R.string.play_again)) {
                                 correctAnswers = 0
                                 index = 1

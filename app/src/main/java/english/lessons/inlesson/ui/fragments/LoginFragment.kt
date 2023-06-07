@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                         Log.d(ContentValues.TAG, "signInWithEmail:success")
                         val user = auth.currentUser
                         updateUI(user)
-                        Case.user = user
+                        App.dm.setUserKey(user!!.uid)
                         App.dm.endLogin()
                         changeFragment(GameFragment())
                     } else {
