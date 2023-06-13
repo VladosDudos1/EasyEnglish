@@ -166,7 +166,7 @@ class GamePictureFragment : Fragment() {
                     .isNotEmpty()
             ) {
                 isFirstPlayer = true
-                store.child("room").child("resultFirst").setValue(binding.etAnswer.text.toString().replace("fuck", "****"))
+                store.child("room").child("resultFirst").setValue(binding.etAnswer.text.toString().lowercase().replace("fuck", "****"))
                 val dialog = MaterialDialog(activityForDialogs)
                 var title = ""
                 val postListener = object : ValueEventListener {
