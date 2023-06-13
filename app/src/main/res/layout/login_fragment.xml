@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/authorization"
         android:textColor="@color/black"
-        android:textSize="28sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editLogin"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,10 +30,9 @@
         android:hint="@string/login"
         android:inputType="textEmailAddress"
         android:maxLines="1"
+        android:paddingVertical="12dp"
         android:paddingStart="16dp"
-        android:paddingTop="6dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="6dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,10 +52,9 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:maxLines="1"
+        android:paddingVertical="12dp"
         android:paddingStart="16dp"
-        android:paddingTop="6dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="6dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,12 +65,12 @@
         android:id="@+id/forgetPasswordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="@string/forgetPassword"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPassword"
-        android:layout_marginTop="18dp"
-        android:textSize="16sp"/>
+        app:layout_constraintTop_toBottomOf="@id/editPassword" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -86,14 +84,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.85" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -101,6 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_700"
+        android:drawableEnd="@drawable/baseline_person_add_24"
         android:padding="8dp"
         android:text="@string/registration"
         android:textAllCaps="false"
@@ -114,7 +113,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple_700"
-        android:padding="8dp"
+        android:drawableEnd="@drawable/ic_baseline_login_24"
+        android:paddingVertical="6dp"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textSize="24sp"
