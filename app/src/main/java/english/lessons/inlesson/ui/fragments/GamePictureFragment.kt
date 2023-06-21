@@ -161,37 +161,34 @@ class GamePictureFragment : Fragment() {
             makeAnswer(3)
         }
         binding.answerBtn.setOnClickListener {
+            val dialog = MaterialDialog(activityForDialogs)
             if (!binding.etAnswer.text.toString()
                     .contains(question) && binding.etAnswer.text.toString()
                     .isNotEmpty()
             ) {
                 isFirstPlayer = true
                 store.child("room").child("resultFirst").setValue(binding.etAnswer.text.toString().lowercase().replace("fuck", "****"))
-                val dialog = MaterialDialog(activityForDialogs)
-                var title = ""
                 val postListener = object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         store.child("room").child("resultSecond")
                             .get()
                             .addOnCompleteListener { r ->
-                                isCorrect =
-                                    r.result.value.toString() == question
                                 if (r.result.value.toString().isNotEmpty()) {
                                     dialog.cancel()
-                                    title = if (isCorrect) {
-                                        addRating()
-                                        getString(R.string.the_player_got_you)
-                                    } else {
-                                        getString(R.string.the_player_did_not_understand_you)
-                                    }
+                                    isCorrect =
+                                        r.result.value.toString() == question
                                     MaterialDialog(activityForDialogs)
                                         .cancelable(false)
-                                        .title(text = title)
-                                        .negativeButton(text =  getString(R.string.leave)) {
-                                            it.cancel()
-                                            activityForDialogs.supportFragmentManager.popBackStack()
+                                        .title(text = if (isCorrect){
+                                            addRating()
+                                            getString(R.string.the_player_got_you)
+                                        } else getString(
+                                            R.string.the_player_did_not_understand_you
+                                        ))
+                                        .negativeButton(text = getString(R.string.leave)) {
                                             store.child("room").child("resultSecond")
                                                 .removeEventListener(this)
+                                            activityForDialogs.supportFragmentManager.popBackStack()
                                             resultOfGame()
                                         }
                                         .show()
@@ -245,9 +242,9 @@ class GamePictureFragment : Fragment() {
             .positiveButton(text =  getString(R.string.leave)) {
                 activityForDialogs.supportFragmentManager.popBackStack()
                 it.cancel()
+                resultOfGame()
             }
             .show { }
-        resultOfGame()
     }
 
     private fun setRandom(): Int {
